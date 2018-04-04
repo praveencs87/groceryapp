@@ -1,0 +1,189 @@
+/* Empty. Add your own CSS if you like 
+
+
+ http://woothemes.github.io/woocommerce-rest-api-docs/#products
+*/
+#linkb ul li
+{
+margin-top:-10px;
+
+}
+.inputclass
+{
+float:left;
+}
+#categoryfont h2 , #categoryfont p
+{
+
+font-size:100%;
+font-style:italic;
+font-family: "Comic Sans MS", cursive, sans-serif;
+text-align:center;
+
+}
+.spinner svg {
+  width: 28px;
+  height: 28px;
+  
+}
+#footertext
+{
+text-align:left;
+font-style:italic;
+}
+#footertext button
+{
+
+font-family: "Comic Sans MS", cursive, sans-serif;
+
+
+}
+
+li
+{
+font-size:75%;
+}
+.custom-dark{
+    color : #30393A !important; // text
+    background-color:red!important; // for bg color
+ }
+
+a:hover {
+ cursor:pointer;
+}
+ .my-nav  li:nth-child(odd) h2{
+  color: #008080;
+}
+
+ .my-nav li:nth-child(even)  h2{
+  color:#9ACD32;
+}
+
+.cattab{font-size:30px;}
+ 
+#registration{ margin-top: 91px !important; }
+.card{ margin-top: -60px !important; }
+.has-header{ margin-top: 0px !important; }
+.has-header-reg{ margin-top: -50px !important; }
+.has-header-myac{ margin-top: 0px !important; }
+ .my-nav  li{
+  width:50%;
+float:left;
+}
+#MAX_VALUE
+{
+
+text-align:right;
+}
+
+ .my-nav-sub  li:nth-child(odd) h2{
+  color: #9ACD32;
+
+}
+
+ .my-nav-sub li:nth-child(even)  h2{
+  color: #008080;
+}
+
+ .my-nav-sub  li{
+  width:50%;
+float:left;
+}
+
+ .mydetails li:nth-child(odd) input {
+  color: #008080;
+  font-weight: bold;
+}
+
+ .mydetails li:nth-child(even)  input {
+  color:#9ACD32;
+  font-weight: bold;
+}
+ .mydetails  {
+  margin: auto;
+    width: 100%;
+    border:3px solid #8AC007;
+    padding: 10px;
+}
+ .mydetails li  {
+    padding-left: 10%;
+}
+input[type="text"]:disabled{background-color:#C0C0C0; }
+ .myaccount  {
+  margin: auto;
+    width: 100%;
+      
+}
+#accbtn
+{
+margin-top:-3px;
+
+}
+#btnsavedetails
+{
+margin-top:-3px;
+
+}
+ .item .orders li:nth-child(3n+3)  {
+  color: #008080;
+float:right;
+   text-align: right;
+}
+
+ .item .orders li:nth-child(odd)  {
+  color: #008080;
+
+}
+ 
+ . .orders li:nth-child(even)   {
+  color:#9ACD32;
+   text-align: center;
+}
+ .item .orders li  {
+float:left;
+width:33%;
+font-size:10px;
+}
+ .item .orderitemdetails li  {
+float:left;
+width:50%;
+font-size:10px;
+}
+
+ .myaccount li:nth-child(odd) input {
+  color: #008080;
+}
+
+ .myaccount li:nth-child(even)  input {
+  color:#9ACD32;
+}
+
+
+.ion-ios-plus-outline{
+    font-size: 18px;
+}
+.ion-ios-minus-outline{
+    font-size: 18px;
+}
+#filtercontent{
+  
+	background-size: 100% auto;
+	background-position:center bottom;
+}
+.pane {
+    background-image: url("../img/grocery.jpg") !important;
+	background-size: 100% auto;
+	background-position:center bottom;
+}
+.bar-royal.bar.bar-header.disable-user-behavior {
+    background: #f25e15 none repeat scroll 0 0;
+}
+.bar-footer #footertext p {
+    display: block !important;
+    float: none !important;
+    line-height: 32px;
+    margin: 0 auto !important;
+    padding: 0 10px;
+    position: relative !important;
+    width: 100%;
+}

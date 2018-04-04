@@ -1,0 +1,99 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+  -->
+<ion-view view-title="Products" >
+  <ion-content >
+
+
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+<label class="item item-input">
+  <i class="icon ion-search placeholder-icon"></i>
+  <input type="search" placeholder="Search" id="appBusyIndicator" ng-model="itemname" ng-change="change(itemname)">
+</label>
+
+    <div class="list" ng-hide="!itemtogglestyle">
+         <div ng-repeat="chat in productlist|filter:pricefilter"   class="item item-thumbnail-left" >
+  
+            <img ng-src={{chat.featured_src}} >
+         
+            
+
+            <h3>{{chat.title}}</h3><br/>
+<span >{{chat.price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <!--  <span ng-bind-html="chat.price_html"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<div ng-if="chat.variations.length>0"><a class="button button-small button-royal" ng-click="openModal(chat)">more+</a></div>
+            <a href="#" ng-click="addtocart('{{chat.title}}',variation(chat,0),{{chat.id}},variation(chat,1),variation(chat,2),variation(chat,3))" ><i class="ion-ios-plus-outline"></i></a>
+            
+           
+              <span ng-bind="eachitemdetailsingle( variation(chat,0) , {{chat.id}} ,variation(chat,1), variation(chat,2), 0)"></span>
+              <!--itemtotalprice:  <span ng-bind="eachitemdetailsingle( {{productfilter(chat)}} , {{chat.ID}} ,2,2,1)"></span>-->
+            
+
+<a href="#" ng-click="removefromcart('{{chat.title}}',variation(chat,0),{{chat.id}},variation(chat,1),variation(chat,2),variation(chat,3))"><i class="ion-ios-minus-outline"></i></a> 
+
+   <br/>
+<!--<a class="button button-small button-royal" ng-click="openModal(chat)">zoom</a>-->
+         </div>
+     
+      </div>
+
+
+  
+  </ion-content>
+</ion-view>
+
+
+
+<!-- image pop up-->
+<script id="image-modal.html" type="text/ng-template" />
+  <div class ="modal image-modal transparent" >
+      <ion-pane class="transparent" ng-style={'align':'center'}>
+         <br/>
+   
+ <h2>{{moreproduct.title}}</h2>
+    <a ng-click="closeModal()">click to zoomout</a>
+  <ion-slide-box>
+    <ion-slide  ng-repeat="variation in moreproduct.variations">
+
+      <div > 
+   <div class="item item-body" >
+      <div  ng-repeat="imageurl in variation.image">
+        <button  ng-click="nextSlide()">Next slide!</button>
+ <button  ng-click="prevSlide()">Prev slide!</button>
+         <img src="{{imageurl.src}}" class="full-image">
+         <span>{{ variation.weight }}{{variation.dimensions.unit}}</span> &nbsp;<p>
+                         
+                  &#8377 : <span ng-bind="eachitemdetailsingle( {{variation.id}} ,{{moreproduct.id}},{{variation.price}}, '{{variation.weight}}{{variation.dimensions.unit}}', 1)"></span> &nbsp; (<span ng-bind="eachitemdetailsingle( {{variation.id}} ,{{moreproduct.id}},{{variation.price}}, '{{variation.weight}}{{variation.dimensions.unit}}', 0)"></span><i class="ion-ios-close-empty"></i><span>&#8377{{variation.price}}</span>)&nbsp; <p> 
+<a href="#" ng-click="addtocart('{{moreproduct.title}}',{{variation.id}},{{moreproduct.id}},{{variation.price}},'{{variation.weight}}{{variation.dimensions.unit}}','{{imageurl.src}}')" ><i class="ion-ios-plus-outline"></i></a>
+            
+           
+              <span ng-bind="eachitemdetailsingle( {{variation.id}} ,{{moreproduct.id}},{{variation.price}}, '{{variation.weight}}{{variation.dimensions.unit}}', 0)"></span>
+              <!--itemtotalprice:  <span ng-bind="eachitemdetailsingle( {{productfilter(chat)}} , {{chat.ID}} ,2,2,1)"></span>-->
+            
+
+<a href="#" ng-click="removefromcart('{{moreproduct.title}}',{{variation.id}},{{moreproduct.id}},{{variation.price}},'{{variation.weight}}{{variation.dimensions.unit}}','{{imageurl.src}}')"><i class="ion-ios-minus-outline"></i></a> 
+      </div>
+</div>
+</div>
+    </ion-slide>
+ 
+  </ion-slide-box>
+     
+    
+ 
+    
+
+  
+
+ 
+      </ion-pane>
+  </div>
+</script>
+<!-- image pop up end-->

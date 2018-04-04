@@ -1,0 +1,50 @@
+<ion-view view-title="Checkout">
+  <ion-content>
+<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+    
+<div class="item item-divider">
+   
+  <div class="item item-text-wrap">
+<h2>Billing Address</h2><p>
+   <span  ng-model="orders.order.billing_address.first_name">{{customerdetails.billing_address.first_name}}</span><p>
+   <span>{{customerdetails.billing_address.address_1}}</span><p>
+   <span>{{customerdetails.billing_address.address_2}}</span><p>
+   <span>{{customerdetails.billing_address.city}}</span><p>
+
+   <span>{{customerdetails.billing_address.postalcode}}</span><p>
+PH:<span>{{customerdetails.billing_address.phone}}</span>
+  </div>
+</div>
+<span>      </span><p>
+<div class="item item-divider" ng-style="{'margin-top':'-10px'}">
+   
+  <div class="item item-text-wrap">
+<h2>Shipping Address</h2><p>
+  <label class="item item-input item-stacked-label">  
+    <input type="text" placeholder="Your Name" ng-model="orders.order.shipping_address.first_name">
+  </label> 
+  <label class="item item-input item-stacked-label">   
+    <input type="text" placeholder="Address Line 1" ng-model="orders.order.shipping_address.address_1">
+  </label>
+<label class="item item-input item-stacked-label">   
+    <input type="text" placeholder="Address Line 2" ng-model="orders.order.shipping_address.address_2">
+  </label>
+<label class="item item-input item-stacked-label" >   
+    <input type="text" placeholder="City" ng-model="orders.order.shipping_address.city">
+  </label>
+<label class="item item-input item-stacked-label">   
+    <input type="text" placeholder="Postalcode" ng-model="orders.order.shipping_address.postcode">
+  </label>
+ </div>
+</div>
+   
+<button class="button button-block button-positive" ng-click="orderproceed()"  ng-style="{'margin-top':'-5px'}">
+PROCEED
+</button>
+
+
+  </ion-content>
+</ion-view>

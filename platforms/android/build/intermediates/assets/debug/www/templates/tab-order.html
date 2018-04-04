@@ -1,0 +1,53 @@
+<ion-view view-title="My Order">
+  <ion-content >
+
+ <div class="item" >
+    <ul class="orders">
+    <li><span> ORDER ID</span><p><span> {{myorder.order_number}}</span></li>
+  <li><span> ORDER DATE</span><p><span> {{myorder.created_at| limitTo: 10}}</span></li>
+  <li><span> AMOUNT</span><p><span> {{myorder.total}}</span></li>
+    </ul>
+  
+    </div>
+ <div class="item">
+  <ul class="orderdetails">
+    <li><span>Total</span><span ng-style="{'float':'right'}">{{myorder.subtotal}}</span></li>
+  <li><span>Shipping</span><span ng-style="{'float':'right'}">{{myorder.total_shipping}}</span></li>
+    <li><b><span>Payable</span><span ng-style="{'float':'right'}">{{myorder.total}}</span></b></li>
+    </ul>
+   </div>
+<div class="item">
+  <ul>
+    <li ng-style="{ 'text-align': 'center','color':'red'}"><b><span >{{myorder.status| uppercase}}</span></b>
+</li>
+</ul>
+</div>
+<br/>
+<br/>
+<div class="item" ng-style="{'margin-top':'-45px'}">
+  <ul class="orderitemdetails">
+    <li ng-style="{ 'font-size': '15px','color':'grey'}"><b><span >Item Details</span></b></li>
+   <li ng-style="{ 'font-size': '15px','color':'grey'}"><b><span ng-style="{'float':'right'}">Delivery Date</span><br/>
+<span ng-style="{'float':'right'}">{{myorder.created_at| limitTo: 10 : 12}}</span><br/>
+<span ng-style="{'float':'right'}">{{myorder.created_at| limitTo: 10 : 3}}</span>
+
+</b></li>
+</ul>
+</div>
+
+<div class="item" >
+  <ul class="orderitems">
+    <li ng-repeat="item in myorder.line_items"><b><span ng-style="{'float':'left'}" >{{item.name}}</span></b>
+<br/>
+<span >{{item.total}}</span>
+
+<span  ng-style="{'float':'right'}">Qty: {{item.quantity}}</span><br/>
+<span ng-style="{'float':'right'}">{{item.price}}</span>
+
+</b></li>
+</ul>
+</div>
+
+
+  </ion-content>
+</ion-view>

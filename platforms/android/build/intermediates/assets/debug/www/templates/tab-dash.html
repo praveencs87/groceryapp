@@ -1,0 +1,115 @@
+<ion-view view-title="Grocery" ng-style="{{dashback}}" hide-nav-bar="true"  ><!-- ng-style={{dashback}}-->
+  <ion-content  class="has-header-reg">
+   <ion-refresher 
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+
+<section  ng-show="{{c}}==true">
+<br/>
+<div class="card">
+  <div class="item item-divider" ng-style="{'text-align':'center'}">
+  <h1><span  ng-style="{'color':'green'}"> Registration</span></h1>
+  </div>
+  <div class="item item-text-wrap">
+<ul ><div class="mydetails" >
+  <li >
+  <label class="item item-input item-stacked-label">
+ <span class="input-label">Email</span>
+      <input class="item item-thumbnail type="text"   ng-model="customerdetails.customer.email"  ng-style="{{reg}}" >    
+</label>
+  </li>
+ <li>
+  <label class="item item-input item-stacked-label">
+ <span class="input-label">Username</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.username" ng-style="{{reg}}" >  
+</label>
+  </li>
+
+<li><label class="item item-input item-stacked-label">
+ <span class="input-label">FirstName</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.first_name" ng-style="{{reg}}"> 
+</label> 
+  </li>
+<li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">LastName</span>
+      <input class="item item-thumbnail type="text"  ng-model="customerdetails.customer.last_name" ng-style="{{reg}}"> 
+</label>  
+  </li>
+<li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">Address Line1</span>
+      <input class="item item-thumbnail type="text"  ng-model="customerdetails.customer.billing_address.address_1"  ng-style="{{reg}}">  </label> 
+  </li>
+ <li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">Address Line2</span>
+      <input class="item item-thumbnail type="text"   ng-model="customerdetails.customer.billing_address.address_2"  ng-style="{{reg}}">  </label>   
+  </li>
+ <li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">City</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.billing_address.city"  ng-style="{{reg}}">  </label>   
+  </li>
+ <li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">State</span>
+      <input class="item item-thumbnail type="text"   ng-model="customerdetails.customer.billing_address.state"  ng-style="{{reg}}"> </label>    
+  </li>
+ <li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">PostCode</span>
+      <input class="item item-thumbnail type="text"   ng-model="customerdetails.customer.billing_address.postcode"  ng-style="{{reg}}"> 
+</label>    
+  </li>
+ <li>
+<label class="item item-input item-stacked-label">
+ <span class="input-label">Phone</span>
+      <input class="item item-thumbnail" type="text"   ng-model="customerdetails.customer.billing_address.phone" ng-style="{{reg}}">  
+</label>  
+  </li>
+</div>
+
+
+
+</ul>
+</div>
+  
+</div>
+ <button class="button button-full button-balanced" ng-click="customersubmit()">
+      Save Details
+    </button>
+ 
+ </section>
+ 
+<section ng-hide="{{c}}==true" >
+<br/>
+<div class="card">
+  <div class="item item-divider" ng-style="{'text-align':'center'}">
+  <h1><span  ng-style="{'color':'green'}"> Login</span></h1>
+  </div>
+  <div class="item item-text-wrap">
+<ul >
+
+
+<li>
+      <input class="item item-thumbnail type="text"  placeholder="Email" ng-model="customerdetails.customer.email">    
+  </li>
+ <li>
+      <input class="item item-thumbnail type="text"  placeholder="Username" ng-model="customerdetails.customer.username">  
+  </li>
+
+
+</ul>
+</div>
+  
+</div>
+ <button class="button button-full button-balanced" ng-click="customerlogin()">
+      Login
+    </button>
+ </section>
+
+  </ion-content>
+</ion-view>

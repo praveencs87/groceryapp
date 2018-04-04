@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+ 
+<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+
+    
+<!-- In <head> -->
+
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/multirange.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    --> 
+
+    <!-- Stylesheets! -->
+    
+    <link rel="stylesheet" href="css/angular-range-slider.css">
+   
+  
+    
+  
+   
+
+ <script src="js/jquery-1.11.3.js"></script>
+
+ 
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="js/angular-range-slider.min.js"></script>
+    <script src="js/multirange.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script src="js/angular-filter.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+
+    <script src="js/ion-cart.js"></script>
+    `
+
+
+
+</head>
+
+<body ng-app="starter" class="platform-android platform-cordova platform-webview">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+   
+
+    <ion-nav-view ></ion-nav-view>-->
+    <div ng-controller="ProductCtrl" ng-cloak>
+        <ion-side-menus>
+
+            <ion-side-menu-content drag-content=false>
+
+                <ion-nav-bar class="bar-royal-head">
+                    <ion-nav-back-button class="button-icon ion-arrow-left-c" ng-click="myGoBack()">
+                    </ion-nav-back-button>
+
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-funnel " ng-click="showLeftMenu()" ng-style="{'display':leftdisplay}">
+                        </button>
+                    </ion-nav-buttons>
+
+                    <ion-nav-buttons side="right">
+                        <button class="button button-icon button-clear ion-navicon" ng-click="showRightMenu()" ng-style="{'display':rightdisplay}">
+                            <!-- ng-style="{'display':rightdisplay}"-->
+                        </button>
+                    </ion-nav-buttons>
+
+                </ion-nav-bar>
+
+                <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+            </ion-side-menu-content>
+
+            <ion-side-menu side="right">
+                <ion-header-bar class="bar bar-header bar-stable bar-balanced">
+                    <h1 class="title">Your Account</h1>
+                </ion-header-bar>
+                <ion-content>
+                    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+                    </ion-refresher>
+<div id="linkb">
+                    <ul>
+                        <li>
+                            <button class="button button-full button-royal" ng-click="gotohome()"  >
+                                Home
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button button-full button-royal" ng-click="gotoorders()">
+                                MyOrders
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button button-full button-royal" ng-click="gotomyaccount()">
+                                MyAccount
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button button-full button-royal" ng-click="Topayment()">
+                                {{checkout()}}
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button button-full button-positive" ng-click="logout()">
+                                Clear Cart
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button button-full button-calm" ng-click="toggleCustom()">
+                                {{listbuttontext}}
+                            </button>
+                        </li>
+                    </ul>
+</div>
+                    <div class="list" ng-hide="itemtogglestyle">
+
+                        <div ng-repeat="item in separateArray " class="item item-thumbnail-left">
+                            <img ng-src="{{ item.image }}">
+
+                            <span>{{ item.prod_name }}</span>
+                            <p>
+                                <span>{{ item.quantity }}</span> &nbsp;
+                                <p>
+                                    <!--  itemtotalquantity: <span>{{eachitemdetails(item,2)}}</span><p>
+                 itemcount:<span>{{eachitemdetails(item,0)}}</span><p>-->
+                                    &#8377 : <span>{{eachitemdetails(item,1)}}</span> &nbsp; (<span> {{eachitemdetails(item,0)}}</span><i class="ion-ios-close-empty"></i><span>&#8377{{item.rate}}</span>)&nbsp;
+                                    <p>
+
+
+                                        <a href="#" ng-click="addtocart('{{ item.prod_name }}',{{item.cat_id}},{{item.prod_id}},{{item.rate}},'{{item.quantity}}','{{item.image}}')"><i class="ion-ios-plus-outline"></i></a><span>&nbsp;&nbsp;{{eachitemdetails(item,0)}}&nbsp;&nbsp;</span>
+                                        <a href="#" ng-click="removefromcart('{{ item.prod_name }}',{{item.cat_id}},{{item.prod_id}},{{item.rate}},'{{item.quantity}}','{{item.image}}')"><i class="ion-ios-minus-outline"></i></a>
+
+                        </div>
+
+                    </div>
+
+                </ion-content>
+            </ion-side-menu>
+            <ion-side-menu side="left" id="filtercontent">
+                <ion-header-bar class="bar bar-header bar-stable bar-balanced">
+                    <h1 class="title">Filter</h1>
+                </ion-header-bar>
+ 
+                <ion-content >
+                    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+                    </ion-refresher>
+
+                    <div class="list">
+
+
+        
+               <!-- <h1>Range Slider Example</h1>
+                <p>Value 1: {{items[1].value}}</p>
+                <p>Value 2: {{items[2].value}}</p>
+                <div data-range-slider data-floor="100" data-ceiling="1000" data-dragstop="true"
+                     data-ng-model-low="items[1].value"
+                     data-ng-model-high="items[2].value"></div>-->
+            
+     
+         
+                        <div id="range"><ul>
+                            <div ng-repeat="range in rangeArray">
+<li ng-style="{'width':'50%','float':'left'}">
+                                <span style="display:block;" position="range.value" id='{{range.name}}'>{{range.value*500}}</span>
+</li>
+                            </div></ul><br/>
+
+                            <vds-multirange-lite ng-model="rangeArray" style="margin-bottom: 10px;" views="views" view="view"></vds-multirange-lite>
+                        </div>
+
+
+         
+                    </div>
+                    <ul class="list">
+
+                        <li class="item item-checkbox" ng-repeat=" cat in category " ng-bind-html-unsafe="cat.name">
+                            <span ng-bind-html="cat.name"></span>
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="checked" ng-change="filtercat(cat.name,checked)" onclick='window.location.assign("#")' />
+                            </label>
+
+
+
+
+                        </li>
+
+
+
+                    </ul>
+
+                </ion-content>
+
+            </ion-side-menu>
+
+        </ion-side-menus>
+        <ion-footer-bar class="bar-assertive" ng-show="myBoolean">
+
+
+
+            <div id="footertext" ng-style="{'display':'block'}">
+                <p>Total Items:<span ng-bind="itemcount()"></span> Totalamount: <span ng-bind="totalamount()"></span>
+                    <button class="button button-small button-royal" ng-click="Topayment()">
+                        {{checkout()}}
+                    </button>
+            </div>
+
+
+
+        </ion-footer-bar>
+    </div>
+    <script id="templates/tab-myaccount.html" type="text/ng-template" />
+    <ion-view view-title="My Account" hide-tab="true">
+        <ion-content class="has-header-myac">
+
+            <ul class="list" ng-style="{'margin-top':'-3px'}">
+
+                <li class="item item-toggle">
+                    <div ng-if="disable==true">
+
+                        Edit
+                    </div>
+                    <div ng-if="disable==false ||disable==null ">
+                        My Account Details
+                    </div>
+                    <label class="toggle toggle-calm">
+                        <input type="checkbox" id="accchek" ng-model="disable">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+
+            </ul>
+            <br/>
+            <br/>
+            <section> 
+                <div class="card">
+<div class="myaccount">
+                    <div class="item item-text-wrap">
+                        <ul>
+                           
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Email</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.email" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">First Name</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.first_name" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Last Name</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.last_name" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Username</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.username" ng-disabled="!disable">
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing First Name</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.first_name" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Last Name</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.last_name" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Address Line1</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.address_1" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Address Line2</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.address_2" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing City</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.city" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing State</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.state" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing PostCode</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.postcode" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Country</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.country" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Email</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.email" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Billing Phone</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.billing_address.phone" ng-disabled="!disable" > </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping FirstName</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.first_name" ng-disabled="!disable">
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping LastName</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.last_name" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping Address Line1</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.address_1" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping Address Line2</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.address_2" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping City</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.city" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping State</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.state" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping Postcode</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.postcode" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="item item-input item-stacked-label" ng-style="{{acc}}">
+                                        <span class="input-label">Shipping Country</span>
+                                        <input class="item item-thumbnail" type="text" ng-model="myaccount.shipping_address.country" ng-disabled="!disable" >
+                                    </label>
+                                </li>
+                         
+
+
+
+                        </ul>   </div>
+                    </div>
+                </div>
+                <div ng-hide="!disable">
+
+                    <button id="accbtn" class="button button-full button-positive" ng-click="updatecustomer() ;disable=false">
+                        Submit
+                    </button>
+                </div>
+            </section>
+
+        </ion-content>
+    </ion-view>
+    </script>
+    <script id="templates/tab-dash.html" type="text/ng-template" />
+    <ion-view view-title="Registration" ng-style="{{dashback}}" hide-nav-bar="true">
+        <!-- ng-style={{dashback}}-->
+        <ion-content class="has-header-reg">
+            <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+            </ion-refresher>
+
+
+            <section ng-show="{{c}}==true">
+                <br/>
+                <div class="card">
+
+                    <div id="registration">
+                        <div class="item item-divider" ng-style="{'text-align':'center'}">
+                            <h1><span  ng-style="{'color':'green'}"> Registration</span></h1>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <ul>
+                                <div class="mydetails">
+                                    <li>
+                                        <label class="item item-input item-stacked-label">
+                                            <span class="input-label">Email</span>
+                                            <input class="item item-thumbnail type=" text "   ng-model="customerdetails.customer.email "  ng-style="{{reg}} " >    
+</label>
+  </li>
+ <li>
+  <label class="item item-input item-stacked-label ">
+ <span class="input-label ">Username</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.username" ng-style="{{reg}}">
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <label class="item item-input item-stacked-label">
+                                            <span class="input-label">FirstName</span>
+                                            <input class="item item-thumbnail type=" text " ng-model="customerdetails.customer.first_name " ng-style="{{reg}} "> 
+</label> 
+  </li>
+<li>
+<label class="item item-input item-stacked-label ">
+ <span class="input-label ">LastName</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.last_name" ng-style="{{reg}}">
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="item item-input item-stacked-label">
+                                            <span class="input-label">Address Line1</span>
+                                            <input class="item item-thumbnail type=" text "  ng-model="customerdetails.customer.billing_address.address_1 "  ng-style="{{reg}} ">  </label> 
+  </li>
+ <li>
+<label class="item item-input item-stacked-label ">
+ <span class="input-label ">Address Line2</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.billing_address.address_2" ng-style="{{reg}}"> </label>
+                                    </li>
+                                    <li>
+                                        <label class="item item-input item-stacked-label">
+                                            <span class="input-label">City</span>
+                                            <input class="item item-thumbnail type=" text " ng-model="customerdetails.customer.billing_address.city "  ng-style="{{reg}} ">  </label>   
+  </li>
+ <li>
+<label class="item item-input item-stacked-label ">
+ <span class="input-label ">State</span>
+      <input class="item item-thumbnail type="text" ng-model="customerdetails.customer.billing_address.state" ng-style="{{reg}}"> </label>
+                                    </li>
+                                    <li>
+                                        <label class="item item-input item-stacked-label">
+                                            <span class="input-label">PostCode</span>
+                                            <input class="item item-thumbnail type=" text "   ng-model="customerdetails.customer.billing_address.postcode "  ng-style="{{reg}} "> 
+</label>    
+  </li>
+ <li>
+<label class="item item-input item-stacked-label ">
+ <span class="input-label ">Phone</span>
+      <input class="item item-thumbnail " type="text "   ng-model="customerdetails.customer.billing_address.phone " ng-style="{{reg}} ">  
+</label>  
+  </li>
+</div>
+
+
+
+</ul>
+</div>
+  </div>
+</div>
+ <button id="btnsavedetails" class="button button-full button-balanced " ng-click="customersubmit() ">
+      Save Details
+    </button>
+ 
+ </section>
+ 
+
+  </ion-content>
+</ion-view>
+</script>
+<script id="templates/tab-myorders.html " type="text/ng-template " />
+<ion-view view-title="My Orders ">
+  <ion-content>
+
+ <ul ng-style="{'margin-top':'-3px'}">
+  <li ng-repeat="order in myorderlist ">
+<a href="#/myorders/{{order.id}} "><div class="list list-inset ">
+
+  <div class="item "  >
+    <ul class="orders ">
+    <li><span> ORDER ID</span><p><span> {{order.order_number}}</span></li>
+  <li><span> ORDER DATE</span><p><span> {{order.created_at| limitTo: 10}}</span></li>
+  <li><span> AMOUNT</span><p><span> {{order.total}}</span></li>
+    </ul>
+    </div>
+
+   
+</div></a>
+  </li>
+  </ul>
+  </ion-content>
+</ion-view>
+</script>
+<!-- In <body> -->
+
+</body>
+
+</html>

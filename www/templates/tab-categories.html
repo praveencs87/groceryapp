@@ -1,0 +1,17 @@
+<ion-view view-title="Category" >
+    <ion-content ng-cloak>
+
+<section>    
+  <ul >
+
+    <div class="my-nav"><li ng-repeat="chat in cat" >        
+ <a class="item item-thumbnail" href="#/tab/categories/{{chat.ID}}+{{chat.slug}}" ng-style="{'background-image': 'url()'}">     
+<img ng-src="../img/veg1.jpg">
+<h2>{{chat.name}}</h2> 
+  <p>{{chat.slug}}</p></a> </li></div>
+
+  </ul>
+</section>
+    </ion-content>
+
+</ion-view>

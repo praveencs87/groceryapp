@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/pinetech/myappgrocery/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="152b1ffbbe2653102ade10e74ac74e8eca66b27a">
+        <dex dex="/home/pinetech/myappgrocery/platforms/android/build/intermediates/pre-dexed/debug/classes-e5db726bdd2010df661a47327017eaea0bf436b3.jar" />
+    </item>
+    <item
+        jar="/home/pinetech/myappgrocery/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="152b1ffbbe2653102ade10e74ac74e8eca66b27a">
+        <dex dex="/home/pinetech/myappgrocery/platforms/android/build/intermediates/pre-dexed/debug/classes-e5db726bdd2010df661a47327017eaea0bf436b3.jar" />
+    </item>
+
+</items>

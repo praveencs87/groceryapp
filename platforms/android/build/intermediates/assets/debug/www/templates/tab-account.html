@@ -1,0 +1,39 @@
+<ion-view view-title="Account">
+  <ion-content class="has-header">
+<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+    <ion-list>
+
+      <div class="list"  ng-style="{'margin-top':'-2px'}" >
+
+                    <div ng-repeat="item in separateArray " class="item item-thumbnail-left">
+                        <img ng-src="{{ item.image }}">
+
+                        <span>{{ item.prod_name }}</span><p> 
+                              <span>{{ item.quantity }}</span> &nbsp;<p>
+                          <!--  itemtotalquantity: <span>{{eachitemdetails(item,2)}}</span><p>
+                 itemcount:<span>{{eachitemdetails(item,0)}}</span><p>--> 
+                  (<span> {{eachitemdetails(item,0)}}</span><i class="ion-ios-close-empty"></i><span>&#8377{{item.rate}}</span>)&nbsp; <p> 
+                      
+<div ng-style={'text-align':'right'}> <b>&#8377  <span> <b>{{eachitemdetails(item,1)}}</span></div>&nbsp;
+                       
+
+                    </div>
+
+  <div class="item item-divider">             
+
+<div ng-style={'text-align':'right','font-size':'20px'}><b>Total Items&nbsp;&nbsp; :<b>&nbsp;  <span ng-bind="itemcount()"></span></div>
+<br/>
+<div ng-style={'text-align':'right','font-size':'20px'}><b>Total Payable :<b> &#8377 <span ng-bind="totalamount()"></span>/-</div> 
+
+
+</div>
+<button class="button button-block button-positive" ng-click="checkout()"  ng-style="{'margin-top':'-5px'}" >
+ CHECKOUT CONTINUE
+</button>
+
+    </ion-list>
+  </ion-content>
+</ion-view>

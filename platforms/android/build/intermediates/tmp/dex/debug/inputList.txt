@@ -1,0 +1,2 @@
+/home/pinetech/myappgrocery/platforms/android/build/intermediates/classes/debug
+/home/pinetech/myappgrocery/platforms/android/build/intermediates/pre-dexed/debug/classes-e5db726bdd2010df661a47327017eaea0bf436b3.jar
